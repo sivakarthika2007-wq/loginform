@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purple Login Form</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:linear-gradient(
+        -45deg,
+        #3d0066,
+        #6a00ff,
+        #8e2de2,
+        #4a00e0
+    );
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.particle{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,.15);
+    animation:float 10s linear infinite;
+}
+
+.particle:nth-child(1){
+    width:120px;
+    height:120px;
+    top:10%;
+    left:15%;
+}
+
+.particle:nth-child(2){
+    width:180px;
+    height:180px;
+    bottom:10%;
+    right:10%;
+}
+
+.particle:nth-child(3){
+    width:80px;
+    height:80px;
+    top:70%;
+    left:25%;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-30px);
+    }
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+.login-box{
+    position:relative;
+    width:420px;
+    padding:45px;
+    border-radius:25px;
+
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.2);
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,.3);
+
+    animation:fadeUp .8s ease;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.logo{
+    text-align:center;
+    color:white;
+    font-size:32px;
+    margin-bottom:10px;
+    font-weight:700;
+}
+
+.subtitle{
+    text-align:center;
+    color:#ddd;
+    margin-bottom:35px;
+}
+
+.input-group{
+    position:relative;
+    margin-bottom:25px;
+}
+
+.input-group input{
+    width:100%;
+    padding:16px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    color:white;
+    font-size:15px;
+    background:rgba(255,255,255,.1);
+}
+
+.input-group label{
+    position:absolute;
+    left:16px;
+    top:16px;
+    color:#ddd;
+    pointer-events:none;
+    transition:.3s;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label{
+    top:-10px;
+    left:12px;
+    font-size:12px;
+    background:#7b2cff;
+    padding:2px 8px;
+    border-radius:6px;
+}
+
+.password-wrapper{
+    position:relative;
+}
+
+.toggle{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:25px;
+    color:white;
+    font-size:14px;
+}
+
+.row a{
+    color:#fff;
+    text-decoration:none;
+}
+
+.login-btn{
+    width:100%;
+    border:none;
+    padding:16px;
+    border-radius:12px;
+
+    background:linear-gradient(
+        45deg,
+        #c471ed,
+        #7f00ff
+    );
+
+    color:white;
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:.4s;
+}
+
+.login-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:
+    0 15px 25px rgba(127,0,255,.5);
+}
+
+.signup{
+    text-align:center;
+    margin-top:25px;
+    color:white;
+}
+
+.signup a{
+    color:#fff;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+@media(max-width:500px){
+
+    .login-box{
+        width:90%;
+        padding:30px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+
+<div class="login-box">
+
+    <div class="logo">LOGIN</div>
+
+    <div class="subtitle">
+        Welcome Back
+    </div>
+
+    <form id="loginForm">
+
+        <div class="input-group">
+            <input type="email" required>
+            <label>Email Address</label>
+        </div>
+
+        <div class="input-group password-wrapper">
+            <input type="password" id="password" required>
+            <label>Password</label>
+
+            <span class="toggle"
+            onclick="togglePassword()">
+            👁
+            </span>
+        </div>
+
+        <div class="row">
+            <label>
+                <input type="checkbox">
+                Remember Me
+            </label>
+
+            <a href="#">Forgot Password?</a>
+        </div>
+
+        <button class="login-btn">
+            Sign In
+        </button>
+
+        <div class="signup">
+            Don't have an account?
+            <a href="#">Create Account</a>
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+
+function togglePassword(){
+
+    let password =
+    document.getElementById("password");
+
+    password.type =
+    password.type === "password"
+    ? "text"
+    : "password";
+}
+
+document
+.getElementById("loginForm")
+.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    let btn =
+    document.querySelector(".login-btn");
+
+    btn.innerHTML="Logging In...";
+
+    setTimeout(()=>{
+
+        btn.innerHTML="✓ Login Successful";
+
+        btn.style.background=
+        "linear-gradient(45deg,#00c853,#00e676)";
+
+    },1500);
+
+});
+
+</script>
+
+</body>
+</html>
